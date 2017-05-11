@@ -14,15 +14,23 @@ class XmlDocument
   	end
 
   	if block_given?
-  		@indent_level += 2
-  		space = " " * @indent_level
   		if @indent
-  			xml += ">\n" + space + yield 
+  			@indent_level += 2
+  			space = " " * @indent_level
+  			xml += ">\n" + space + yield
+  			@indent_level = @indent_level - 2
+  			space = " " * @indent_level
+  			xml +=  space + "</" + method_symbol.to_s + ">\n"
+  			
   		else
   			xml + ">" + yield + "</" + method_symbol.to_s + ">"
   		end
   	else
-  		return xml + "/>"
+  		if @indent
+  			return xml += "/>\n" 
+  		else
+  			return xml += "/>" 
+  		end
   	end
   end
 end
