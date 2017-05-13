@@ -84,12 +84,15 @@ describe Fixnum do
 
   it "reads thousands" do
     expect(1000.in_words).to eq("one thousand")
+    expect(2000.in_words).to eq("two thousand")
     expect(32767.in_words).to eq("thirty two thousand seven hundred sixty seven")
-    expect(32768.in_words).to eq("thirty two thousand seven hundred sixty eight")
+    expect(323768.in_words).to eq("three hundred twenty three thousand seven hundred sixty eight")
+    expect(320001.in_words).to eq("three hundred twenty thousand one")
   end
 
   it "reads millions" do
     expect(10_000_001.in_words).to eq("ten million one")
+    expect(11_110_001.in_words).to eq("eleven million one hundred ten thousand one")
   end
 
   it "reads billions" do
